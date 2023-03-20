@@ -7,3 +7,4 @@ for row in tablica :
             min_index=i
             min_value = row[i]
         row[0], row[min_index]=row[min_index], row[0]
+print(tablica)
