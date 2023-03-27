@@ -1,14 +1,8 @@
-def wynik(i,licznik):
-    licznik+=1
-    if i<3:
-        return 1
+def reverse_array(tablica):
+    if len(tablica) == 0 or len(tablica) == 1:
+        return tablica
     else:
-        if i%2==0:
-            return wynik(i-3)+wynik(i-1)+1, licznik
-        else:
-            return wynik(i-1)%7, licznik
+        return [tablica[-1]] + reverse_array(tablica[:-1])
 
-licznik=0
-i=int(input("Podaj i: "))
-wynik=wynik(i,licznik)
-print(f"Wynik: {wynik}, licznik: {licznik}")
+tablica = [1, 2, 3, 4, 5]
+print(reverse_array(tablica))
