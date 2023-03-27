@@ -1,9 +1,8 @@
-def nwd(a,b):
-    while b!=0:
-        if b>a:
-            b=a%b
-            a=b
-
+def nwd(a, b):
+    if b == 0:
+        return a
+    else:
+        return nwd(b, a % b)
 
 a=12
 b=18
