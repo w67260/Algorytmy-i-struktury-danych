@@ -1,38 +1,25 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+def evaluate_postfix(expression):
+    stack = []
 
-class SortedList:
-    def __init__(self):
-        self.head = None
-
-    def insert(self, value):
-        new_node = Node(value)
-
-        if not self.head or value < self.head.data:
-            new_node.next = self.head
-            self.head = new_node
+    for token in expression:
+        if token.isdigit():
+            stack.append(int(token))
         else:
-            current = self.head
-            while current.next and value >= current.next.data:
-                current = current.next
-            new_node.next = current.next
-            current.next = new_node
+            operand2 = stack.pop()
+            operand1 = stack.pop()
 
-    def display(self):
-        current = self.head
-        while current:
-            print(current.data, end=" -> ")
-            current = current.next
-        print("None")
+            if token == '+':
+                result = operand1 + operand2
+            elif token == '-':
+                result = operand1 - operand2
+            elif token == '*':
+                result = operand1 * operand2
+            elif token == '/':
+                result = operand1 / operand2
 
-sorted_list = SortedList()
+            stack.append(result)
+    return stack.pop()
 
-sorted_list.insert(5)
-sorted_list.insert(2)
-sorted_list.insert(8)
-sorted_list.insert(1)
-sorted_list.insert(4)
-
-sorted_list.display()
+expression = input("Podaj wyrażenie w notacji postfiksowej: ").split()
+result = evaluate_postfix(expression)
+print("Wynik:", result)
