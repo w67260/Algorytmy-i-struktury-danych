@@ -1,25 +1,28 @@
-#DO DOKONCZENIA
+def sprawdz_poprawnosc_symboli(symbole):
+    stos = []
+    dopasowanie = {
+        '}': '{',
+        ']': '[',
+        '>': '<',
+        ')': '(',
+        '"': '"',
+        "'": "'",
+        '}': '{',
+        ']': '[',
+        '>': '<',
+    }
 
-from Zadanie1 import Stack
-def parChecker(symobolString):
-    s=Stack()
-    balanced=True
-    index=0
-    while index<len(symobolString) and balanced:
-        symobol=symobolString[index]
-        if symobol=="(":
-            s.push(symobol)
-        else:
-            if s.isEmpty():
-                balanced=False
-            else:
-                s.pop()
-        index+=1
-    if balanced and s.isEmpty():
-        return True
-    else:
-        return False
+    for symbol in symbole:
+        if symbol in dopasowanie.values():
+            stos.append(symbol)
+        elif symbol in dopasowanie.keys():
+            if len(stos) == 0 or stos.pop() != dopasowanie[symbol]:
+                return False
 
-print(parChecker('((()))'))
-print(parChecker('((())'))
-print(parChecker('(())(())'))
+    return len(stos) == 0
+
+symbole = "{[<abc>]} 'sample'"
+if sprawdz_poprawnosc_symboli(symbole):
+    print("Symbole są poprawne.")
+else:
+    print("Symbole są niepoprawne.")
